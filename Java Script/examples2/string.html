@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript String Methods Demo</h2>
+
+<input id="text" type="text" placeholder="Enter text">
+<input id="value" type="text" placeholder="Enter search / index value">
+<br><br>
+
+<button onclick="runDemo()">Run Demo</button>
+
+<h3>Results:</h3>
+<p id="output"></p>
+
+<script>
+function runDemo() {
+    const str = document.getElementById("text").value;
+    const val = document.getElementById("value").value;
+
+    let text = "";
+
+    text += "charAt(0): " + str.charAt(0) + "<br>";
+    text += "charCodeAt(0): " + str.charCodeAt(0) + "<br>";
+    text += "indexOf(val): " + str.indexOf(val) + "<br>";
+    text += "lastIndexOf(val): " + str.lastIndexOf(val) + "<br>";
+    text += "slice(1, 4): " + str.slice(1, 4) + "<br>";
+    text += "substr(1, 4): " + str.substr(1, 4) + "<br>";
+    text += "substring(1, 4): " + str.substring(1, 4) + "<br>";
+    text += "toLowerCase(): " + str.toLowerCase() + "<br>";
+    text += "toUpperCase(): " + str.toUpperCase() + "<br>";
+    text += "concat(' JS'): " + str.concat(" JS") + "<br>";
+    text += "replace(val, '***'): " + str.replace(val, "***") + "<br>";
+    text += "match(val): " + str.match(val) + "<br>";
+    text += "search(val): " + str.search(val) + "<br>";
+
+    document.getElementById("output").innerHTML = text;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+<body>
+
+<h2>Live Date & Time</h2>
+
+<p id="output"></p>
+
+<script>
+function updateTime() {
+    const now = new Date();
+
+    let text = "";
+    text += "getDate(): " + now.getDate() + "<br>";
+    text += "getDay(): " + now.getDay() + "<br>";
+    text += "getMonth(): " + now.getMonth() + "<br>";
+    text += "getFullYear(): " + now.getFullYear() + "<br>";
+    text += "getHours(): " + now.getHours() + "<br>";
+    text += "getMinutes(): " + now.getMinutes() + "<br>";
+    text += "getSeconds(): " + now.getSeconds() + "<br>";
+    text += "getMilliseconds(): " + now.getMilliseconds();
+
+    document.getElementById("output").innerHTML = text;
+}
+
+// Run immediately
+updateTime();
+
+// Update every 1 second
+setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Methods Demo</h2>
+
+<input id="value" type="text" placeholder="Enter value">
+<br><br>
+
+<button onclick="pushValue()">Push</button>
+<button onclick="popValue()">Pop</button>
+<button onclick="shiftValue()">Shift</button>
+<button onclick="unshiftValue()">Unshift</button>
+<button onclick="sliceArray()">Slice (1,3)</button>
+<button onclick="reverseArray()">Reverse</button>
+<button onclick="sortArray()">Sort</button>
+<button onclick="includesValue()">Includes</button>
+<button onclick="indexOfValue()">IndexOf</button>
+
+<h3>Array:</h3>
+<p id="arrayDisplay"></p>
+
+<h3>Result:</h3>
+<p id="result"></p>
+
+<script>
+let arr = ["Apple", "Banana", "Mango"];
+
+function display(msg = "") {
+    document.getElementById("arrayDisplay").innerHTML = arr.join(", ");
+    document.getElementById("result").innerHTML = msg;
+}
+
+function pushValue() {
+    const val = document.getElementById("value").value;
+    arr.push(val);
+    display("Pushed: " + val);
+}
+
+function popValue() {
+    const removed = arr.pop();
+    display("Popped: " + removed);
+}
+
+function shiftValue() {
+    const removed = arr.shift();
+    display("Shifted: " + removed);
+}
+
+function unshiftValue() {
+    const val = document.getElementById("value").value;
+    arr.unshift(val);
+    display("Unshifted: " + val);
+}
+
+function sliceArray() {
+    const sliced = arr.slice(1, 3);
+    display("Slice(1,3): " + sliced.join(", "));
+}
+
+function reverseArray() {
+    arr.reverse();
+    display("Array Reversed");
+}
+
+function sortArray() {
+    arr.sort();
+    display("Array Sorted");
+}
+
+function includesValue() {
+    const val = document.getElementById("value").value;
+    display("Includes '" + val + "' → " + arr.includes(val));
+}
+
+function indexOfValue() {
+    const val = document.getElementById("value").value;
+    display("IndexOf '" + val + "' → " + arr.indexOf(val));
+}
+
+// Initial display
+display();
+</script>
+
+</body>
+</html>
