@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class UserInterface {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BookUtility bookUtil = new BookUtility();
+
+        System.out.println("Enter the number of entries");
+        int n = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Enter the bookId/bookName/bookType/bookCategory/bookEdition");
+        for (int i = 0; i < n; i++) {
+            String input = sc.nextLine();
+            String[] parts = input.split("/");
+            
+            Book book = new Book(parts[0], parts[1], parts[2], parts[3], parts[4]);
+            
+            try {
+                bookUtil.toValidateBookType(book);
+            } catch (InvalidBookException e) {
+                System.out.println(e.getMessage());
+                return; 
+            }
+        }
+
+        System.out.println("Print the book details");
+        for (Book b : bookUtil.getBookList()) {
+            System.out.println("bookId=" + b.getBookId() + " bookName=" + b.getBookName() + " bookType=" + b.getBookType());
+        }
+
+        System.out.println("Enter book name to search");
+        String searchName = sc.nextLine();
+        bookUtil.setSearchbookName(searchName);
+
+        Thread thread = new Thread(bookUtil);
+        thread.start();
+
+        try {
+            thread.join(); 
+            if (bookUtil.getCounter() > 0) {
+                System.out.println("Count of books in the library with the book name " + searchName.toUpperCase() + " is " + bookUtil.getCounter());
+            } else {
+                System.out.println("No Books found");
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+============================================================================
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookUtility implements Runnable {
+    private List<Book> bookList = new ArrayList<Book>();
+    private String searchbookName;
+    private int counter;
+
+    // Getters and Setters
+    public List<Book> getBookList() { return bookList; }
+    public void setBookList(List<Book> bookList) { this.bookList = bookList; }
+    public String getSearchbookName() { return searchbookName; }
+    public void setSearchbookName(String searchbookName) { this.searchbookName = searchbookName; }
+    public int getCounter() { return counter; }
+    public void setCounter(int counter) { this.counter = counter; }
+
+    public void toValidateBookType(Book obj) throws InvalidBookException {
+        if (obj.getBookType().equalsIgnoreCase("Engineering")) {
+            bookList.add(obj);
+        } else {
+            throw new InvalidBookException("Book type Invalid");
+        }
+    }
+
+    @Override
+    public void run() {
+        counter = 0;
+        for (Book book : bookList) {
+            if (book.getBookName().equalsIgnoreCase(searchbookName)) {
+                counter++;
+            }
+        }
+    }
+}
